@@ -1,0 +1,12 @@
+<html>
+
+	{{ range . }}
+		
+		<p>{{ . }}</p>
+	{{ end }}
+
+	<form method="post" action="/post">
+		<input type="textarea" id="feedback" name="feedback">
+		<input type="submit">
+	</form>
+</html>
