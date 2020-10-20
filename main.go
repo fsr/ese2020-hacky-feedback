@@ -21,7 +21,7 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 
 	text, err := ioutil.ReadFile("feedback.txt")
 	if err != nil {
-		return
+		log.Fatalf("could not read feedback file: %s", err)
 	}
 	f := Feedback {Str: strings.Split(string(text), "\n")}
 
@@ -49,6 +49,7 @@ func handlePost(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", handleIndex)
+	http.Handle("/static/", http.StripPrefix("/static/",http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/post", handlePost)
 	http.ListenAndServe(":7777", nil)
 }

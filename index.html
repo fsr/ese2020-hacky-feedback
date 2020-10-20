@@ -1,12 +1,53 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/style.css">
+    <title>Distribute</title>
+<style>
+    a {
+        cursor: pointer;
+    }
+    li#pairing {
+        display: none;
+    }
+</style>
+</head>
+<body>
+    <header id="page-header">
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x align-middle">
+                <div class="cell medium-2">
+                    <a href="/" id="page-logo" class="foo">
+                        <img alt="ESE2020" title="ESE2020" src="static/logo.svg">
+                    </a>
+                </div>
 
+                <div class="cell medium-10">
+</div>
+        </div>
+    </header>
+    <main id="page-content">
 	{{ range $elem := .Str }}
-		
 		<p>{{ $elem }}</p>
 	{{ end }}
-
+	<h2> Gib uns Feedback: </h2>
 	<form method="post" action="/post">
 		<input type="textarea" id="feedback" name="feedback">
 		<input type="submit">
 	</form>
+   </main>
+
+    <footer id="page-footer">
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <div class="cell medium-4">
+                </div>
+                <div class="cell medium-8">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
 </html>
