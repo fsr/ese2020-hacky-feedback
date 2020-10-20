@@ -1,8 +1,8 @@
 <html>
 
-	{{ range . }}
+	{{ range $elem := .Str }}
 		
-		<p>{{ . }}</p>
+		<p>{{ $elem }}</p>
 	{{ end }}
 
 	<form method="post" action="/post">

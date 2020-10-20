@@ -9,6 +9,9 @@ import (
 	"strings"
 )
 
+type Feedback struct {
+      Str []string
+ }
 
 func handleIndex(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("index.html")
@@ -19,8 +22,10 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 	text, err := ioutil.ReadFile("feedback.txt")
 	if err != nil {
 		return
-	}	
-	t.Execute(w, strings.Split(string(text), "\n"))
+	}
+	f := Feedback {Str: strings.Split(string(text), "\n")}
+
+	t.Execute(w, f)
  
 }
 
@@ -29,7 +34,7 @@ func handlePost(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         log.Fatal(err)
     }
-    if _, err := f.Write([]byte(r.FormValue("feedbacktext"))); err != nil {
+    if _, err := f.Write([]byte(r.FormValue("feedback"))); err != nil {
         log.Fatal(err)
     }
 
@@ -39,6 +44,7 @@ func handlePost(w http.ResponseWriter, r *http.Request) {
     if err := f.Close(); err != nil {
         log.Fatal(err)
     }
+    http.Redirect(w, r, "/", http.StatusFound)
 }
 
 func main() {
