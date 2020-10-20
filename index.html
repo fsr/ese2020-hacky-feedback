@@ -28,12 +28,15 @@
         </div>
     </header>
     <main id="page-content">
+	    <ul style="margin-left: 2rem;">
 	{{ range $elem := .Str }}
-		<p>{{ $elem }}</p>
+		<li style="margin-left: 2rem;">{{ $elem }}</li>
 	{{ end }}
-	<h2> Gib uns Feedback: </h2>
+	    </ul>
+	<h2 style="margin-left: 2rem;"> Gib uns Feedback: </h2>
 	<form method="post" action="/post">
-		<input type="textarea" id="feedback" name="feedback">
+		   <label>Feedbacktext:</label>
+		<input type="textarea" style="margin-left: 2rem;" id="feedback" name="feedback">
 		<input type="submit">
 	</form>
    </main>
