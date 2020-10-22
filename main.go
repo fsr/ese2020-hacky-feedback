@@ -11,7 +11,7 @@ import (
 
 type Feedback struct {
       Str []string
- }
+}
 
 func handleIndex(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("index.html")
@@ -23,10 +23,17 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatalf("could not read feedback file: %s", err)
 	}
-	f := Feedback {Str: strings.Split(string(text), "\n")}
+	f := Feedback {}
+	for _, item := range(strings.Split(string(text), "\x00")) {
+		if strings.TrimSpace(item) != "" {
+			f.Str = append(f.Str, item)
+		}
+	}
 
-	t.Execute(w, f)
- 
+	err = t.Execute(w, f)
+	if err != nil {
+		log.Printf("template error: %v", err)
+	}
 }
 
 func handlePost(w http.ResponseWriter, r *http.Request) {
@@ -38,7 +45,7 @@ func handlePost(w http.ResponseWriter, r *http.Request) {
         log.Fatal(err)
     }
 
-    if _, err := f.Write([]byte("\n")); err != nil {
+    if _, err := f.Write([]byte("\x00")); err != nil {
         log.Fatal(err)
     }
     if err := f.Close(); err != nil {
