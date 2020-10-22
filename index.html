@@ -27,19 +27,20 @@
 </div>
         </div>
     </header>
-    <main id="page-content">
-	    <ul style="margin-left: 2rem;">
+    <main id="page-content" class="grid-container">
+	    <ul>
 	{{ range $elem := .Str }}
 		<li style="margin-left: 2rem;">{{ $elem }}</li>
 	{{ end }}
 	    </ul>
 	<h2 style="margin-left: 2rem;"> Gib uns Feedback: </h2>
 	<p style="margin-left: 2rem;"> Dein Text wird &oumlffentlich auf dieser Seite erscheinen!</p>
-	<form method="post" action="/post">
-		<label style="margin-left: 2rem;">Text:</label></br>
-		<textarea style="margin-left: 2rem;" id="feedback" name="feedback">
-		</textarea>
-		<input type="submit">
+	<form style="margin-left: 2rem;" method="post" action="/post">
+		<label>Text:</label></br>
+		<textarea cols=60 id="feedback" name="feedback"></textarea>
+		<p>
+		<input value="Feedback absenden" type="submit">
+		</p>
 	</form>
    </main>
 
